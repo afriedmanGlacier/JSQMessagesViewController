@@ -239,6 +239,14 @@ JSQMessagesKeyboardControllerDelegate>
     _showTypingIndicator = showTypingIndicator;
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView.collectionViewLayout invalidateLayout];
+    
+    // uncomment below if not showing typing indicator
+    /*if (_showTypingIndicator) {
+        [self.collectionView reloadData];
+        if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
+            [self scrollToBottomAnimated:YES];
+        }
+    }*/
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
