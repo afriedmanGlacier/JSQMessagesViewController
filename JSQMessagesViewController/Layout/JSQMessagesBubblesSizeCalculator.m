@@ -125,6 +125,13 @@
                                                              options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
                                                           attributes:@{ NSFontAttributeName : layout.messageBubbleFont }
                                                              context:nil];
+        
+        if ([[messageData text] hasPrefix:@"geo:"]) {
+            stringRect = [@"Location sent" boundingRectWithSize:CGSizeMake(maximumTextWidth, CGFLOAT_MAX)
+                                                        options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                     attributes:@{ NSFontAttributeName : layout.messageBubbleFont }
+                                                        context:nil];
+        }
 
         CGSize stringSize = CGRectIntegral(stringRect).size;
 

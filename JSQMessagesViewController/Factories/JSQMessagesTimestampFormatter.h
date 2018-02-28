@@ -36,12 +36,16 @@
  *  The default value is a dictionary containing attributes that specify centered, light gray text and the bold system font at size `12.0f`.
  */
 @property (copy, nonatomic) NSDictionary *dateTextAttributes;
+@property (copy, nonatomic) NSDictionary *dateTextAttributesLeft;
+@property (copy, nonatomic) NSDictionary *dateTextAttributesRight;
 
 /**
  *  The text attributes to apply to the minute and hour componenents of the string representation of a given date. 
  *  The default value is a dictionary containing attributes that specify centered, light gray text and the system font at size `12.0f`.
  */
 @property (copy, nonatomic) NSDictionary *timeTextAttributes;
+@property (copy, nonatomic) NSDictionary *timeTextAttributesLeft;
+@property (copy, nonatomic) NSDictionary *timeTextAttributesRight;
 
 /**
  *  Returns the shared timestamp formatter object.
@@ -73,6 +77,8 @@
  *  @see `timeTextAttributes`.
  */
 - (NSAttributedString *)attributedTimestampForDate:(NSDate *)date;
+- (NSAttributedString *)attributedTimestampForDateLeft:(NSDate *)date; 
+- (NSAttributedString *)attributedTimestampForDateRight:(NSDate *)date;
 
 /**
  *  Returns a string representation of *only* the minute and hour components of the given date formatted in the current locale styled using `NSDateFormatterShortStyle`.

@@ -55,6 +55,12 @@
         NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.alignment = NSTextAlignmentCenter;
         
+        NSMutableParagraphStyle *paragraphStyleLeft = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        paragraphStyleLeft.alignment = NSTextAlignmentLeft;
+        
+        NSMutableParagraphStyle *paragraphStyleRight = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        paragraphStyleRight.alignment = NSTextAlignmentRight;
+        
         _dateTextAttributes = @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12.0f],
                                  NSForegroundColorAttributeName : color,
                                  NSParagraphStyleAttributeName : paragraphStyle };
@@ -98,6 +104,47 @@
     
     return [[NSAttributedString alloc] initWithAttributedString:timestamp];
 }
+
+- (NSAttributedString *)attributedTimestampForDateLeft:(NSDate *)date
+{
+    if (!date) {
+        return nil;
+    }
+    
+    NSString *relativeDate = [self relativeDateForDate:date];
+    NSString *time = [self timeForDate:date];
+    
+    NSMutableAttributedString *timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
+                                                                                  attributes:self.dateTextAttributesLeft];
+    
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:time
+                                                                      attributes:self.timeTextAttributesLeft]];
+    
+    return [[NSAttributedString alloc] initWithAttributedString:timestamp];
+}
+
+- (NSAttributedString *)attributedTimestampForDateRight:(NSDate *)date
+{
+    if (!date) {
+        return nil;
+    }
+    
+    NSString *relativeDate = [self relativeDateForDate:date];
+    NSString *time = [self timeForDate:date];
+    
+    NSMutableAttributedString *timestamp = [[NSMutableAttributedString alloc] initWithString:relativeDate
+                                                                                  attributes:self.dateTextAttributesRight];
+    
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    
+    [timestamp appendAttributedString:[[NSAttributedString alloc] initWithString:time
+                                                                      attributes:self.timeTextAttributesRight]];
+    
+    return [[NSAttributedString alloc] initWithAttributedString:timestamp];
+}
+
 
 - (NSString *)timeForDate:(NSDate *)date
 {

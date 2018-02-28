@@ -62,6 +62,8 @@
 
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
+    
+    self.canShowKeyboard = YES;
 
     [self jsq_addTextViewNotificationObservers];
 }
@@ -219,7 +221,10 @@
 
 - (BOOL)canBecomeFirstResponder
 {
-    return [super canBecomeFirstResponder];
+    if (_canShowKeyboard) { 
+        return [super canBecomeFirstResponder];
+    }
+    return NO;
 }
 
 - (BOOL)becomeFirstResponder

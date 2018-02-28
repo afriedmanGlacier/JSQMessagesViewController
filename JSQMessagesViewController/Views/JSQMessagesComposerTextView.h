@@ -58,6 +58,11 @@
 @property (weak, nonatomic) id<JSQMessagesComposerTextViewPasteDelegate> pasteDelegate;
 
 /**
+ *  A flag for first responder
+ */
+@property (nonatomic) BOOL canShowKeyboard; 
+
+/**
  *  Determines whether or not the text view contains text after trimming white space 
  *  from the front and back of its string.
  *

@@ -277,6 +277,7 @@ JSQMessagesKeyboardControllerDelegate>
     NSParameterAssert(self.senderDisplayName != nil);
 
     [super viewWillAppear:animated];
+    [self.inputToolbar.contentView.textView resignFirstResponder];
     if (!self.inputToolbar.contentView.textView.hasText) {
         self.toolbarHeightConstraint.constant = self.inputToolbar.preferredDefaultHeight;
     }
@@ -559,13 +560,18 @@ JSQMessagesKeyboardControllerDelegate>
 
     if (!isMediaMessage) {
         cell.textView.text = [messageItem text];
+        
+        if ([[messageItem text] hasPrefix:@"geo:"]) {
+            cell.textView.text = @"Location sent";
+        }
 
-        if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
+        // comment out because debugger shows entering this for some reason
+        /*if ([UIDevice jsq_isCurrentDeviceBeforeiOS8]) {
             //  workaround for iOS 7 textView data detectors bug
             cell.textView.text = nil;
             cell.textView.attributedText = [[NSAttributedString alloc] initWithString:[messageItem text]
                                                                            attributes:@{ NSFontAttributeName : collectionView.collectionViewLayout.messageBubbleFont }];
-        }
+        }*/
 
         NSParameterAssert(cell.textView.text != nil);
 
