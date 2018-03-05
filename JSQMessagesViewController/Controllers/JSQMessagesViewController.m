@@ -240,13 +240,13 @@ JSQMessagesKeyboardControllerDelegate>
     [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self.collectionView.collectionViewLayout invalidateLayout];
     
-    // uncomment below if not showing typing indicator
-    /*if (_showTypingIndicator) {
-        [self.collectionView reloadData];
+    // typing indicator was off bottom of screen and not showing. This appears to fix it.
+    if (_showTypingIndicator) {
+        //[self.collectionView reloadData];
         if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
             [self scrollToBottomAnimated:YES];
         }
-    }*/
+    }
 }
 
 - (void)setShowLoadEarlierMessagesHeader:(BOOL)showLoadEarlierMessagesHeader
