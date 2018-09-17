@@ -233,7 +233,9 @@
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    [UIMenuController sharedMenuController].menuItems = nil;
+    if (action == @selector(paste:)) {
+        return YES;
+    }
     return [super canPerformAction:action withSender:sender];
 }
 @end
