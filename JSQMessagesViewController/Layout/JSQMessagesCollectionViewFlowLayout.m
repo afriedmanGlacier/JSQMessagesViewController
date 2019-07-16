@@ -66,6 +66,10 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     
     _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
+    UIFontDescriptor *fontDescriptor = [_messageBubbleFont.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitItalic];
+    // making the new font; size:0 means 'keep the size as is'
+    _italicMessageBubbleFont = [UIFont fontWithDescriptor:fontDescriptor size:0];
+    
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         _messageBubbleLeftRightMargin = 240.0f;
     }
@@ -438,6 +442,8 @@ const CGFloat kJSQMessagesCollectionViewAvatarSizeDefault = 30.0f;
     layoutAttributes.textViewTextContainerInsets = self.messageBubbleTextViewTextContainerInsets;
     
     layoutAttributes.messageBubbleFont = self.messageBubbleFont;
+    
+    layoutAttributes.italicMessageBubbleFont = self.italicMessageBubbleFont;
     
     layoutAttributes.incomingAvatarViewSize = self.incomingAvatarViewSize;
     

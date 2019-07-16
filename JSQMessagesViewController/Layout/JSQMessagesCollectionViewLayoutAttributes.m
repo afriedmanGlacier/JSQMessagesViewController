@@ -27,6 +27,10 @@
     if (self) {
         _messageBubbleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         _messageBubbleContainerViewWidth = 320.0f;
+        
+        UIFontDescriptor *fontDescriptor = [_messageBubbleFont.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitItalic];
+        // making the new font; size:0 means 'keep the size as is'
+        _italicMessageBubbleFont = [UIFont fontWithDescriptor:fontDescriptor size:0];
     }
     return self;
 }
@@ -134,6 +138,7 @@
     }
     
     copy.messageBubbleFont = self.messageBubbleFont;
+    copy.italicMessageBubbleFont = self.italicMessageBubbleFont;
     copy.messageBubbleContainerViewWidth = self.messageBubbleContainerViewWidth;
     copy.textViewFrameInsets = self.textViewFrameInsets;
     copy.textViewTextContainerInsets = self.textViewTextContainerInsets;

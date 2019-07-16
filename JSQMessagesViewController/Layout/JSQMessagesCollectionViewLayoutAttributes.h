@@ -30,6 +30,8 @@
  */
 @property (strong, nonatomic) UIFont *messageBubbleFont;
 
+@property (strong, nonatomic) UIFont *italicMessageBubbleFont;
+
 /**
  *  The width of the `messageBubbleContainerView` of a `JSQMessagesCollectionViewCell`.
  *  This value should be greater than `0.0`.
