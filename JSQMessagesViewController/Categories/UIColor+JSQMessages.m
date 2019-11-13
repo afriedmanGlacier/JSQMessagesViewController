@@ -48,10 +48,14 @@
 
 + (UIColor *)jsq_messageBubbleLightGrayColor
 {
-    return [UIColor colorWithHue:240.0f / 360.0f
-                      saturation:0.02f
-                      brightness:0.92f
-                           alpha:1.0f];
+    if (@available(iOS 13.0, *)) { 
+        return [UIColor systemGray4Color];
+    } else {
+        return [UIColor colorWithHue:240.0f / 360.0f
+        saturation:0.02f
+        brightness:0.92f
+             alpha:1.0f];
+    }
 }
 
 #pragma mark - Utilities

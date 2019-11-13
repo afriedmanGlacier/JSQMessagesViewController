@@ -33,8 +33,15 @@
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
 
     CGFloat cornerRadius = 6.0f;
+    
+    UIColor *lblColor = [UIColor blackColor];
+    UIColor *backColor = [UIColor whiteColor];
+    if (@available(iOS 13.0, *)) {
+        lblColor = [UIColor labelColor];
+        backColor = [UIColor systemBackgroundColor];
+    }
 
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = backColor;
     self.layer.borderWidth = 0.5f;
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.cornerRadius = cornerRadius;
@@ -49,7 +56,7 @@
     self.userInteractionEnabled = YES;
 
     self.font = [UIFont systemFontOfSize:16.0f];
-    self.textColor = [UIColor blackColor];
+    self.textColor = lblColor;
     self.textAlignment = NSTextAlignmentNatural;
 
     self.contentMode = UIViewContentModeRedraw;
