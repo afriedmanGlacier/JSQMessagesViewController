@@ -325,4 +325,8 @@
  */
 - (void)didReceiveMenuWillHideNotification:(NSNotification *)notification;
 
+//access in subclass when main screen is adjusted to something non-standard
+- (void)jsq_setToolbarBottomLayoutGuideConstant:(CGFloat)constant;
+- (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame;
+
 @end
