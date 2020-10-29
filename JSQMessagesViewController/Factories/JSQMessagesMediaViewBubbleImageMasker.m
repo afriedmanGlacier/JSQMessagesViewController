@@ -51,8 +51,12 @@
 
 - (void)applyIncomingBubbleImageMaskToMediaView:(UIView *)mediaView
 {
-    JSQMessagesBubbleImage *bubbleImageData = [self.bubbleImageFactory incomingMessagesBubbleImageWithColor:[UIColor whiteColor]];
+    // changed to outgoing with affinetransform after due to changes in
+    // XCode 12 and iOS 14
+    JSQMessagesBubbleImage *bubbleImageData = [self.bubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor whiteColor]];
+    
     [self jsq_maskView:mediaView withImage:[bubbleImageData messageBubbleImage]];
+    mediaView.layer.mask.affineTransform = CGAffineTransformMakeScale(-1, 1);
 }
 
 + (void)applyBubbleImageMaskToMediaView:(UIView *)mediaView isOutgoing:(BOOL)isOutgoing
@@ -74,10 +78,21 @@
     NSParameterAssert(view != nil);
     NSParameterAssert(image != nil);
     
-    UIImageView *imageViewMask = [[UIImageView alloc] initWithImage:image];
-    imageViewMask.frame = CGRectInset(view.frame, 2.0f, 2.0f);
+    //UIImageView *imageViewMask = [[UIImageView alloc] initWithImage:image];
+    //imageViewMask.frame = CGRectInset(view.frame, 2.0f, 2.0f);
     
-    view.layer.mask = imageViewMask.layer;
+    //view.layer.mask = imageViewMask.layer;
+    
+    // images were not showing up due to changes in XCode 12 and iOS 14
+    CGPoint center = CGPointMake(image.size.width / 2.0f, image.size.height / 2.0f);
+    UIEdgeInsets insets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
+    CALayer *maskLayer = [CALayer layer];
+    maskLayer.frame = CGRectInset(view.frame, 2.0f, 2.0f);
+    maskLayer.contents = (__bridge id)image.CGImage;
+    maskLayer.contentsScale = image.scale;
+    maskLayer.contentsCenter = CGRectMake(insets.left/image.size.width, insets.top/image.size.height, 1.0/image.size.width, 1.0/image.size.height);
+    
+    view.layer.mask = maskLayer;
 }
 
 @end
