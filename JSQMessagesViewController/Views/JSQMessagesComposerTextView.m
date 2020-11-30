@@ -55,7 +55,10 @@
     self.scrollsToTop = NO;
     self.userInteractionEnabled = YES;
 
-    self.font = [UIFont systemFontOfSize:16.0f];
+    UIFontDescriptor *userFont = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    float fontSize = [userFont pointSize]-1;
+
+    self.font = [UIFont systemFontOfSize:fontSize];//16.0f];
     self.textColor = lblColor;
     self.textAlignment = NSTextAlignmentNatural;
 

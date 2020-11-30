@@ -260,9 +260,11 @@ typedef void (^JSQAnimationCompletionBlock)(BOOL finished);
 
 - (void)jsq_resetKeyboardAndTextView
 {
-    [self jsq_setKeyboardViewHidden:YES];
-    [self jsq_removeKeyboardFrameObserver];
-    [self.textView resignFirstResponder];
+    if (self.textView.editable) {
+        [self jsq_setKeyboardViewHidden:YES];
+        [self jsq_removeKeyboardFrameObserver];
+        [self.textView resignFirstResponder];
+    }
 }
 
 #pragma mark - Key-value observing
